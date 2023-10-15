@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Love Score Calculator</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-image: url('bg.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 2px solid #000;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #ff6b6b;
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #000;
+            border-radius: 10px;
+            font-size: 18px;
+        }
+
+        #boy, #girl {
+            width: 50%;
+        }
+
+        button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+            padding: 0;
+            position: relative;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        button svg {
+            fill: #ff6b6b;
+            width: 120px;
+            height: auto;
+            transition: fill 0.3s;
+        }
+
+        button:hover svg {
+            fill: #e45050;
+        }
+
+        .love-button {
+            font-size: 24px;
+        }
+
+        #love-score {
+            font-size: 32px;
+            color: #ff6b6b;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .result {
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .button-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 16px;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Love Score Calculator ❤️</h1>
+        <label for="boy">Boy's Name:</label>
+        <input type="text" id="boy" placeholder="Enter Boy's Name">
+        <br>
+        <label for="girl">Girl's Name:</label>
+        <input type="text" id="girl" placeholder="Enter Girl's Name">
+        <br>
+        <button onclick="calculateLoveScore()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 16.3 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 7.8-8.55 11.54L12 21.35z"/>
+            </svg>
+            <div class="button-text">Press to Check</div>
+        </button>
+        <div id="love-score"></div>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateLoveScore() {
+            var boyName = document.getElementById("boy").value.toLowerCase();
+            var girlName = document.getElementById("girl").value.toLowerCase();
+
+            
+            if (boyName === "anish pandey" && girlName === "dikshya giri") {
+                displayResult("💯 You're a perfect match! 💑", 100);
+            } else if (boyName === "anish" && girlName === "dikshya") {
+                displayResult("💯 You're a perfect match! 💑", 100);
+            } else if (girlName === "dikshya" || girlName === "dikshya giri") {
+                displayResult("😡 Dikshya belongs to my creator!", 0);
+            } else {
+                
+                var boyScore = 0;
+                var girlScore = 0;
+
+                for (var i = 0; i < boyName.length; i++) {
+                    boyScore += boyName.charCodeAt(i) - 96;
+                }
+                for (var i = 0; i < girlName.length; i++) {
+                    girlScore += girlName.charCodeAt(i) - 96; 
+                }
+
+                
+                var totalScore = boyScore + girlScore+20;
+                var loveScore = totalScore % 101;
+
+               
+                if (loveScore >= 70) {
+                    displayResult("🎉 You're a great match! 🥂", loveScore);
+                } else if (loveScore >= 30) {
+                    displayResult("🤔 There's potential, but it needs some work. 💪", loveScore);
+                } else {
+                    displayResult("😢 Uh-oh! It might not be the right match. Keep looking! 💔", loveScore);
+                }
+            }
+        }
+
+        function displayResult(resultMessage, loveScore) {
+            var loveScoreElement = document.getElementById("love-score");
+            var resultElement = document.getElementById("result");
+
+            loveScoreElement.textContent = "Love Score: " + loveScore + "%";
+            resultElement.textContent = resultMessage;
+        }
+    </script>
+</body>
+</html>
